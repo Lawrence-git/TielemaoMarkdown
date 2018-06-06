@@ -16,7 +16,8 @@ Go官网文档：[https://golang.org/doc](https://golang.org/doc)
 
 到官网[下载地址](https://golang.org/dl/)下载windows所用的系统安装包，下载回来后点击安装即可。
 
-![go-msi]($res/go-msi.jpg)
+![](https://www.tielemao.com/wp-content/uploads/2018/05/go-msi.jpg)
+
 选择下载msi包来进行安装，安装进行的同时还会替你设置好环境变量等。
 
 如果是`zip`解压的需要配置下环境变量，此过程不再描述。如果是`msi`安装包会自动配置环境变量，检验是否能正常使用只需要打开`cmd`或者`powershell`输入： go version
@@ -52,7 +53,7 @@ GOPATH=E:\GoWork
 ```
 当然，go 的msi安装包安装完成后，己默认设置了GOPATH，我们只需要右击【计算机】属性-【高级系统设置】-【高级】-【环境变量】设置编辑就可以了。
 
-![Go-work]($res/Go-work.jpg)
+![](https://www.tielemao.com/wp-content/uploads/2018/05/Go-work.jpg)
 
 GOPATH允许多个目录，当有多个目录时，请注意分隔符，多个目录的时候Windows是分号，Linux系统是冒号，当有多个GOPATH时，默认会将go get的内容放在第一个目录下。
 
@@ -101,7 +102,7 @@ hello, world
 
 ### GoDocServer
 
-![GoDocServer]($res/GoDocServer.jpg)
+![](https://www.tielemao.com/wp-content/uploads/2018/05/GoDocServer.jpg)
 
 附：点击开始菜单，所有程序，找到go的程序目录，它下面会有一个GoDocServer程序，运行后的效果如上图，也是挺有意思的。可以在web界面下查看整个Go目录树了。
 
