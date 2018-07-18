@@ -1,6 +1,6 @@
 # 记Git报错-refusing to merge unrelated histories
 
-[[toc]]
+@toc
 
 ## 环境
 
