@@ -1,7 +1,7 @@
 Django与Ajax
 ===
 
-[[toc]]
+@toc
 
 学习Ajax之前，我们先来将json的知识重温一遍，毕竟和json关系挺密切的。
 
@@ -129,6 +129,79 @@ Django与Ajax
 ## 实例
 
 ### 简单的ajax请求
-效果：当点击页面上的［点我试试］按钮时，在按钮的下方呈现出［消灭人类暴政，世界属于三体］字样。
+效果：当点击页面上的［三体］按钮时，在按钮的下方呈现出［消灭人类暴政，世界属于三体］字样。
 
-以一个Django新项目为例，其中的
+以一个Django新项目为例，其中的相关代码如下：
+
+`urls.py`中添加index和test路由:
+```python
+from django.contrib import admin
+from django.urls import path
+from app import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('index/', views.index, name="index"),
+    path('test/', views.test，name="test"),
+]
+```
+
+`views.py`中添加视图函数index和test：
+
+```python
+from django.shortcuts import render, HttpResponse
+
+# Create your views here.
+
+def index(request):
+    return render(request, "index.html")
+
+def test(request):
+    return HttpResponse("消灭人类暴政，世界属于三体")
+```
+
+`templates`模板中添加index.html文件，内容如下：
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试用</title>
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+    <div class="col-md-3">
+        <button class="btn btn-primary" id="book" title="点我试试">三体</button>
+        <p class="con"></p>
+    </div>
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
+    <script>
+        $("#book").click(function () {
+            //当对id为book的按钮进行点击操作时触发发送ajax请求
+            $.ajax({
+                url: "/test/", //请求要走的url路由
+                type: "get", //默认请求就是get
+                success: function (data) { //必須要有一个形参，例如data来接收后端发过来的响应体
+                    console.log(data); //在浏览器控制台打印显示data
+                    $(".con").text(data); //将data发送给con标签，显示文本内容
+                }
+            })
+        })
+    </script>
+</body>
+</html>
+```
+注意，上面的html页面中使用了bootsrap和jquery，这不是重点。此时访问页面的效果如下：
+![ajax-demo01]($resource/ajax-demo01.gif)
+
+上例的ajax请求代码中，success表示请求成功，并拿到响应体之后，执行的（函数）动作！
+data是用来接收响应体的数据。
+此时，后端服务器中我们定义了test视图函数返回的是一个字符串给data。
+所以在局部（dom操作p标签）将"消灭人类暴政，世界属于三体"这句话给刷新显示出来了。
+
+### ajax加法运算（get请求）
+
+用户在网页输入两个整数，浏览器通过ajax传输两个加数到后端，后端计算出结果后返回给用户。
+
+
