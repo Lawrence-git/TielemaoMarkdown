@@ -10,3 +10,9 @@ Showdoc关闭注册
 $this->sendError(10101,'不开放注册');
 return  ;
 ```
+如图：
+![showdoc_no_reg]($resource/showdoc_no_reg.jpg)
+
+访问注册页面，点击注册时弹出不开放注册的提示
+![showdoc_no_reg2]($resource/showdoc_no_reg2.jpg)
+

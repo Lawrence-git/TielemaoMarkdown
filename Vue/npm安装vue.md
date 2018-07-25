@@ -29,6 +29,9 @@ $ cnpm install [name]
 ```
 
 ### 安装vue-cli
+
+`vue-cli`用于快速搭建大型单页应用,可创建并启动一个带热重载、保存时静态检查以及可用于生产环境的构建配置的项目。
+
 `$ cnpm install --global vue-cli`
 ![cnpm-install-vue-cli]($resource/cnpm-install-vue-cli.jpg)
 如上图，使用`--global`选项是因为这样可以在全局下使用vue-cli工具来创建vue项目，而不是要在特定的安装目录下才能使用vue-cli。
@@ -90,4 +93,21 @@ $ cnpm install [name]
 
 退出监听，直接关闭cmd窗口即可。
 
+### 目录结构
 
+> *   build -- 大部分是webpack的配置文件
+>     
+>     
+> *   config -- 配置文件，比如配置监听端口
+>     
+>     
+> *   node_modules -- 依赖包都在这里
+>     
+>     
+> *   src -- 主工程文件夹，基本上所有的开发都在这个文件夹进行
+>     
+>     
+> *   static -- 静态文件目录
+>     
+>     
+> *   package.json -- 项目的一些配置信息
