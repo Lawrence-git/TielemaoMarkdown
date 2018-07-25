@@ -1,5 +1,6 @@
 # git 分支管理
 
+by 铁乐猫
 @toc
 
 ## 创建分支
@@ -59,3 +60,36 @@
 查看远程和本地分支
 
       git branch -a
+
+## 合并分支
+
+`git rebase <branch_name>`用于把一个分支的修改**合并到当前分支**。
+
+`git merge <branch_name>`也是合并分支。
+
+两者不同的是`git merge`会合并两个分支产生一个新commit对象【拥有两个parent】。
+![git-merge]($resource/git-merge.jpg)
+
+`git rebase` 【rebase】顾名思义**重新定义起点**，即重新定义分支指向commit对象。从而改变commit history。
+![git-rebase]($resource/git-rebase.jpg)
+
+`git rebase`也由此可以保持分支的整洁。
+![git-rebase2]($resource/git-rebase2.jpg)
+
+## 修复Bug
+
+**问：在公司如果遇到要紧急修复的bug，怎么解决？**
+
+* 在master分支上创建一个debug分支；
+  * git branch debug 
+* 切换到debug分支上进行修复；
+  * git checkout debug
+* 修复完毕后切换到master分支，再合并debug分支到master；
+  * git checkout master
+  * git merge debug 
+* 删除debug分支；
+  * git branch -d debug
+* 切换回dev分支，继续进行开发。
+  * git checkout dev
+
+【end】
