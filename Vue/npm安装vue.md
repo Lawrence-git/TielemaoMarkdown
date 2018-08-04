@@ -1,5 +1,27 @@
 # npm安装vue
+
+by 铁乐猫
 @toc
+
+## Vue.js 是什么
+
+Vue (读音 /vjuː/，类似于 **view**) 是一套用于构建用户界面的**渐进式框架**。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。Vue 的核心库只关注视图层，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与现代化的工具链以及各种支持类库结合使用时，Vue 也完全能够为复杂的单页应用提供驱动。
+
+* 数据驱动视图
+  * 数据驱动是vuejs最大的特点。
+  * 在vuejs中，所谓的数据驱动就是**当数据发生变化的时候，用户界面发生相应的变化，开发者不需要手动的去修改dom**。
+
+* 声明式渲染
+  * Vue.js 的核心是一个允许采用简洁的模板语法来声明式地将数据渲染进 DOM 的系统。
+  
+## 直接用script引入
+
+直接下载并用 `<script>` 标签引入，`Vue` 会被注册为一个全局变量。
+注：在开发环境下不要使用压缩版本，不然你就失去了所有常见错误相关的警告!
+
+* [开发版本](https://vuejs.org/js/vue.js)包含完整的警告和调试模式
+
+* [生产版本](https://vuejs.org/js/vue.min.js)删除了警告，30.90KB min+gzip
 
 ## 安装vue
 
@@ -10,6 +32,17 @@
 $ npm install vue
 ```
 
+## 对不同构建版本的解释
+
+在 [NPM 包的 `dist/` 目录](https://cdn.jsdelivr.net/npm/vue/dist/)你将会找到很多不同的 Vue.js 构建版本。
+这里列出了它们之间的差别：
+
+|  | UMD | CommonJS | ES Module |
+| --- | --- | --- | --- |
+| **完整版** | vue.js | vue.common.js | vue.esm.js |
+| **只包含运行时版** | vue.runtime.js | vue.runtime.common.js | vue.runtime.esm.js |
+| **完整版 (生产环境)** | vue.min.js | - | - |
+| **只包含运行时版 (生产环境)** | vue.runtime.min.js | - |  |
 
 ## 安装命令行工具 (CLI)
 
@@ -46,11 +79,9 @@ $ cnpm install [name]
 新建一个项目文件夹，进入该文件夹后敲以下命令初始化一个vue项目
 `vue init webpack 项目名称`
 
+其中webpack为vue的其中一个模板。
 查看帮助得知，如果自己的github仓库上 己有模板也可指定github上的仓库来初始化项目:
 ![vue-init-webpack-project]($resource/vue-init-webpack-project.jpg)
-
-由于要使用到webpack，最好先npm安装一下webpack会比较好。
-`cnpm install --global webpack`
 
 下图开始初始化一个vue项目，利用的就是vue-cli和webpack：
 `vue init webpack my-project`
@@ -96,18 +127,12 @@ $ cnpm install [name]
 ### 目录结构
 
 > *   build -- 大部分是webpack的配置文件
->     
->     
 > *   config -- 配置文件，比如配置监听端口
->     
->     
 > *   node_modules -- 依赖包都在这里
->     
->     
 > *   src -- 主工程文件夹，基本上所有的开发都在这个文件夹进行
->     
->     
 > *   static -- 静态文件目录
->     
->     
 > *   package.json -- 项目的一些配置信息
+
+![vue_dir]($resource/vue_dir.jpg)
+
+【end】
