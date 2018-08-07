@@ -37,7 +37,7 @@ $git remote add origin https://github.com/tielemao/TielemaoMarkdown
 
 命令：
 ```git
-$git pull origin master –allow-unrelated-histories
+$git pull origin master –-allow-unrelated-histories
 ```
 以上是将远程仓库的文件拉取到本地仓库了。
 紧接着将本地仓库的提交推送到远程github仓库上，使用的命令是：
