@@ -61,6 +61,14 @@ Installing setuptools, pip, wheel...done.
 operation@opensuse-wordpress:~/work> source my-env/bin/activate
 (my-env) operation@opensuse-wordpress:~/work> 
 ```
+
+如果是windows平台的话，一般为直接到脚本执行目录下执行
+例：
+```
+# 在win平台下做的虚拟环境，目录路径会有所不同，直接去到目录下执行activate即可
+env\Scripts>activate
+```
+
 * 检查虚拟环境中安装好的包版本信息
 `pip freeze`
 * 退出my-env Python虚拟环境虚拟环境
