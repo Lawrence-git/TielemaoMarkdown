@@ -1,0 +1,44 @@
+# opensuse编译安装Python3后缺少zlib
+@toc
+
+## 前言
+由于opensuse包管理安装的是python2.7，而最近我又用编译安装了python3。
+之后使用virtualenv虚拟环境指定创建python3版本的隔离环境时就出现了错误，报缺少zlib模块。
+![virtualenv-python3]($resource/virtualenv-python3.jpg)
+
+尝试过直接用yzpper安装zlib会报找不到这个模块，而重新编译安装python3时指定--with-zlib也是找不到。所以需要对zlib也进行编译安装。
+
+## 编译安装
+官网[http://www.zlib.net/](http://www.zlib.net/)下载最新版本的zlib源码文件，我下载的是`zlib-1.2.11.tar.gz`
+
+安装zlib:
+`tar xzvf zlib-1.2.11.tar.gz`
+`cd zlib-1.2.11`
+
+建议默认路径安装，编译三部曲：
+```bash
+./configure
+make
+make install
+```
+
+## python导入zlib
+如下图，编译安装完成zlib后，进python3测试己经可能正常导入zlib包。
+![python3-zlib]($resource/python3-zlib.jpg)
+
+zlib安装完后，`libz.a`在`/usr/local/lib/,opensuse`中`zlib.h`默认放在`/usr/local/include/`中。
+其它linux的`zlib.h`文件一般在`/usr/include`中。
+
+## 重新编译python并指定zlib
+如果还发生少数导入不成功，或你想直接软链接升级python旧版本的，可能需要重新编译python。
+
+进入Python源码文件目录，重新编译Python
+
+`sudo ./configure --enable-optimizations --prefix=/usr/local/python-3.5.6 --with-zlib=/usr/include`
+或者：
+`./configure --enable-optimizations --prefix=/usr/local/python-3.5.6 --with-zlib-dir=/usr/local/lib`
+
+都可以完成python对zlib库的支持，在python源码中直接import zlib即可使用zlib了。
+
+2018-8-15 铁乐与猫
+end

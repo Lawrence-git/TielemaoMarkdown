@@ -88,11 +88,22 @@ env\Scripts>activate
 * 当使用virtualenv建立虚拟运行环境来开发项目时，千万不要忘了先激活虚拟运行环境。
 * 而当开发完成，不再需要该虚拟环境时，直接使用rm等命令将对应的目录删除即可。
 
-* 指定虚拟环境使用的python版本
+## 指定虚拟环境使用的python版本
 在创建python虚拟环境时，可以指定虚拟环境要使用的python版本，例如下命令（使用-p参数指明python解释器的路径）：
 
-```python
-virtualenv -p /usr/bin/python2.7 ENV2.7  #创建python2.7的虚拟环境virtualenv -p /usr/bin/python3.4 ENV3.4  #创建python3.4的虚拟环境
+```bash
+  -p PYTHON_EXE, --python=PYTHON_EXE
+                        The Python interpreter to use, e.g.,
+                        --python=python3.5 will use the python3.5 interpreter
+                        to create the new environment.  The default is the
+                        interpreter that virtualenv was installed with
+                        (/usr/bin/python)
+
+```
+
+```bash
+virtualenv -p /usr/bin/python2.7 ENV2.7  #创建python2.7的虚拟环境
+virtualenv -p /usr/bin/python3.4 ENV3.4  #创建python3.4的虚拟环境
 ```
 
 # virtualenvwrapper 统一管理虚拟环境
