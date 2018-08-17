@@ -55,6 +55,7 @@ New python executable in /home/operation/work/my-env/bin/python
 Installing setuptools, pip, wheel...done.
 ```
 * 激活my-env Python虚拟环境，并进入该虚拟环境
+**注意**：source这个命令不要带sudo使用才有效，不然会被报找不到source命令。
 `source my-env/bin/activate`
 终端提示符会有提示，仍可以切换到任何目录中执行，而不局限于在my-env目录中;
 ```bin
@@ -104,6 +105,7 @@ env\Scripts>activate
 ```bash
 virtualenv -p /usr/bin/python2.7 ENV2.7  #创建python2.7的虚拟环境
 virtualenv -p /usr/bin/python3.4 ENV3.4  #创建python3.4的虚拟环境
+virtualenv --python=python3 my-env       #同样可以创建python3的虚拟环境
 ```
 
 # virtualenvwrapper 统一管理虚拟环境

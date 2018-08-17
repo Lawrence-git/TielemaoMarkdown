@@ -16,7 +16,6 @@
 
 ## 编译安装
 
-### 补充
 注意编译安装python前最好先保证系统己安装上以下库
 ```
 yum install zlib
@@ -24,15 +23,43 @@ yum install zlib-devel
 yum install openssl
 yum install openssl-devel
 yum install readline-devel
+yum install gcc patch libffi-devel python-devel bzip2-devel ncurses-devel sqlite-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel -y
 ```
 
 **解压源码包**
 `tar zxvf Python-3.5.6.tgz`
 `cd Python-3.5.6`
+
+### openSUSE编译python3找不到ssl模块
+这会导致你在配置虚拟环境后使用pip去下载包的时候报https连接的错误！
+所以我在碰到这个情况并千辛万苦解决后将此步骤放到这里作为重要补充，以免你像我那样多次重新编译（极其耗时！）
+
+下图是我碰到的在虚拟环境python3.5.6版本下，使用pip安装django时报的错，就是因为编译安装时没有指定ssl。
+![pip-in-django-ssl]($resource/pip-in-django-ssl.jpg)
+
+**解决办法**
+
+由于我使用的是openSUSE的系统，所以我使用`yzpper in openssl openssl-devel`安装好ssl了，但仍需要重新编译安装才能正确导入ssl模块。
+
+在这里最好直接编辑python3.5.6的源安装配置文件，毕竟openSUSE的ssl默认并不是装在`/usr/local/ssl`。
+
+* 使用vim进行编辑：
+`vim ~/Python3.5.6/Modules/Setup.dist`
+* 未编辑之前是长这样的，有关ssl的配置集中在207-210四行中。
+![python3-setup-ssl]($resource/python3-setup-ssl.jpg)
+但我用的是openSUSE系统，所以只需要编辑208-210三行，也就是`#SSL=/usr/local/ssl`不要去解除注释，以免弄巧成拙，当然我感觉要设置成我系统的`/etc/ssl`可能也是可以的。
+
+* 编辑，也就是去掉相关行注释之后如下图：
+![opensuse-python3-ssl]($resource/opensuse-python3-ssl.jpg)
+
+之后再进行下一步的编译三步。
+
 **配置选项**
-`sudo ./configure --enable-optimizations --prefix=/usr/local/python-3.5.6 --with-zlib --with-readline`
-`--enable-optimizations` 为最优安装，建议使用这个参数。
+`sudo ./configure --enable-optimizations --prefix=/usr/local/python-3.5.6`
+`--enable-optimizations` 为优化性能的选项，建议使用上这个参数。
 `--prefix`为指定安装的路径
+
+注：python3.5.6我多次尝试过了，它己经不认`--with-ssl`，`with-zlib`等选项了，我感觉这可能是一种进步，因为我如果漏装了zlib和readline的话，系统重新安装上就是了，不用再重新编译python3也能正确导入了。但注意的是ssl视系统情况不同而不同，openSUSE下ssl的话还是得重新编译且是在setup.dist中配置。
 
 进行编译安装
 ```
@@ -93,7 +120,7 @@ virtualenv --python=python3 my-env     #创建python3.5的虚拟环境
 报找不到zlib模块错误。
 
 所以最好还是系统原环境变量安装成高版本的python，或进行python编译安装的时候记得加上`--with-zlib`。
-最好`--with-zlib-devel`和`readline`也带上。
+最好`--with-zlib-devel`和`readline`（用于命令行）、`--with-ssl`(ssl用于后期pip下载安装软件）也带上。
 
 当然，补救办法也是有的，就是重新进行编译安装。
 (重新进行本文最开始的操作，当然本文最开始笔者己经补充更正过了编译安装时的配置。）
@@ -165,7 +192,24 @@ Installing setuptools, pip, wheel...done.
 ![py3-virtualenv]($resource/py3-virtualenv.jpg)
 
 具体virtualenv的使用命令等见相关文章，在此就不再详述。
-如此，在liunx下己经可以实现多版本的python完美共存。
+
+## 测试虚拟环境下安装包
+
+测试进入虚拟环境中安装django，因为我就试过openSUSE系统openssl和openssl-devel忘装而导致虚拟环境下python3.5.6版本使用pip安装时报https连接错误的坑。（此坑和解决办法己补充到前文）
+
+```bash
+cd /work/py3
+source py3/bin/activate
+```
+
+**注意**：source这个命令不要带sudo使用才有效，不然会被报找不到source命令。
+
+![virtualenv-sudo-source]($resource/virtualenv-sudo-source.jpg)
+
+运行`pip install django==1.11`之类安装包的命令，下图可看到能正常进行安装。
+![virtualenv-pip-install]($resource/virtualenv-pip-install.jpg)
+
+测试完成，如此，在liunx下己经可以实现多版本的python完美共存。
 
 2018-8-15 铁乐与猫
 end
